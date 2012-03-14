@@ -167,7 +167,7 @@ puts-step "Installing dependencies using Pip ($PIP_VERSION)"
 source $BIN_DIR/steps/collectstatic
 
 # NodeJS and npm packages.
-if [ -f $1/package.json ]; then
+if [ -f $1/npm_requirements.txt ]; then
   source $BIN_DIR/compilenodejs $1 $2
 fi
 

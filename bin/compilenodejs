@@ -51,6 +51,18 @@ function run_npm() {
   fi
 }
 
+function run_npm_install_global() {
+  package="$1"
+
+  cd $BUILD_DIR
+  HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js install -g $package 2>&1 | indent
+
+  if [ "${PIPESTATUS[*]}" != "0 0" ]; then
+    echo " !     Failed to install dependencies with npm"
+    exit 1
+  fi
+}
+
 function manifest_versions() {
   curl "http://${S3_BUCKET}.s3.amazonaws.com/manifest.${1}" -s -o - | tr -s '\n' ' '
 }
@@ -71,7 +83,7 @@ function resolve_version() {
 }
 
 function package_engine_version() {
-  version=$(cat $BUILD_DIR/package.json | $bootstrap_node/bin/node $LP_DIR/vendor/json/json engines.$1 2>/dev/null)
+  version=$(echo "{}" | $bootstrap_node/bin/node $LP_DIR/vendor/json/json engines.$1 2>/dev/null)
   if [ $? == 0 ]; then
     echo $version | sed -e 's/\([<>=]\) /\1/g'
   fi
@@ -178,8 +190,7 @@ fi
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
-run_npm "install"
-run_npm "rebuild"
+run_npm_install_global ${cat $1/npm_requirements.txt}
 echo "Dependencies installed" | indent
 
 # repack cache with new assets
