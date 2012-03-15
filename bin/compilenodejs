@@ -55,7 +55,8 @@ function run_npm_install_global() {
   package="$1"
 
   cd $BUILD_DIR
-  HOME="$BUILD_DIR" $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js install $package 2>&1 | indent
+  HOME="$BUILD_DIR" 
+  $VENDORED_NODE/bin/node $VENDORED_NPM/cli.js install -g --prefix $BUILD_DIR $package 2>&1 | indent
 
   if [ "${PIPESTATUS[*]}" != "0 0" ]; then
     echo " !     Failed to install dependencies with npm"
