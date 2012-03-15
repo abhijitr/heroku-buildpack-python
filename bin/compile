@@ -172,7 +172,7 @@ if [ -f $1/npm_requirements.txt ]; then
 fi
 
 if [ -f "$BUILD_DIR/postdeploy" ]; then
-  $BUILD_DIR/postdeploy
+  source $BUILD_DIR/postdeploy
 fi
 
 # ### Finalize
@@ -195,6 +195,7 @@ set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
 set-default-env PYTHONPATH /app/
 
+<<<<<<< HEAD
 
 # Experimental post_compile hook.
 source $BIN_DIR/steps/hooks/post_compile
