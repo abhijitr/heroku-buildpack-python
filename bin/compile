@@ -171,6 +171,10 @@ if [ -f $1/npm_requirements.txt ]; then
   source $BIN_DIR/compilenodejs $1 $2
 fi
 
+if [ -f "$BUILD_DIR/postdeploy" ]; then
+  $BUILD_DIR/postdeploy
+fi
+
 # ### Finalize
 #
 
@@ -180,6 +184,7 @@ for dir in $CACHED_DIRS; do
   cp -R $dir $CACHE_DIR/
 done
 
+<<<<<<< HEAD
 # Set context environment variables.
 set-env PATH '$HOME/.heroku/python/bin:$PATH'
 set-env PYTHONUNBUFFERED true
