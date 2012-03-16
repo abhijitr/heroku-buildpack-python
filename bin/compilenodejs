@@ -191,7 +191,10 @@ fi
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
-run_npm_install_global $(cat $1/npm_requirements.txt)
+for dependency in $(cat $1/npm_requirements.txt)
+do
+    run_npm_install_global $dependency
+done
 echo "Dependencies installed" | indent
 
 # repack cache with new assets
