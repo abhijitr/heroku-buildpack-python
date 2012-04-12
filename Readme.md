@@ -78,3 +78,13 @@ Runtime options include:
 - python-2.7.3
 - python-3.3.0
 - pypy-1.9 (experimental)
+
+To change the vendored virtualenv, unpack the desired version to the `src/` folder, and update the virtualenv() function in `bin/compile` to prepend the virtualenv module directory to the path. The virtualenv release vendors its own versions of pip and setuptools.
+
+Changing Buildpacks
+-------------------
+
+If you've already deployed an app to heroku and you'd like to switch to this buildpack from the standard python buildpack, just run the following command with the heroku command line app:
+
+    heroku config:add BUILDPACK_URL=git://github.com/jiaaro/heroku-buildpack-django.git
+    
