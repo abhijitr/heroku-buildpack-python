@@ -168,7 +168,7 @@ source $BIN_DIR/steps/collectstatic
 
 # NodeJS and npm packages.
 puts-step "Found npm_requirements.txt; Installing NodeJS."
-source $BIN_DIR/compilenodejs $1 $2
+source $BIN_DIR/compilenodejs $BUILD_DIR $CACHE_DIR
 
 # ### Finalize
 #

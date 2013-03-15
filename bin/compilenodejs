@@ -189,6 +189,12 @@ if [ -d $CACHE_STORE_DIR ]; then
 
 fi
 
+# list files
+for file in *
+do
+  echo "$file"
+done
+
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
 for dependency in $(cat $1/npm_requirements.txt)
